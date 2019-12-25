@@ -10,7 +10,8 @@ exclude = [
     ".gitignore",
     ".travis.yml",
     ".gitlab-ci.yml",
-    ".travis/*"
+    ".travis/*",
+    ".github/*"
 ]
 
 [dependencies]
