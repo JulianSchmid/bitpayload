@@ -1,0 +1,16 @@
+[package]
+name = "bitpayload"
+version = "0.0.1"
+authors = ["Julian Schmid <info@julianschmid.name>"]
+repository = "https://github.com/JulianSchmid/bitpayload"
+description = "WIP"
+license = "BSD-3-Clause"
+readme = "README.md"
+exclude = [
+    ".gitignore",
+    ".travis.yml",
+    ".gitlab-ci.yml",
+    ".travis/*"
+]
+
+[dependencies]
