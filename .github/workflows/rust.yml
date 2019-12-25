@@ -3,7 +3,7 @@ name: Rust build & test
 on: [push, pull_request]
 
 jobs:
-  build and test:
+  build-and-test:
 
     runs-on: ${{ matrix.os }}
     strategy:
