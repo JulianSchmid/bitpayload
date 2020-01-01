@@ -2,8 +2,9 @@ use std::fmt::{Formatter, Debug};
 
 pub enum Type {
     BaseType(BaseTypeDef),
+    Integer(IntType),
+    Float32()
     Struct(StructDef),
-    EnumDef(EnumDef),
     StaticArray(Box<StaticArrayDef>),
     DynamicArray(Box<DynamicArrayDef>),
     StringType(StringTypeDef),
@@ -20,8 +21,9 @@ pub struct BaseTypeDef {
 }
 
 /// Signed & unsigned integer types
+#[derive(Clone)]
 pub enum IntType {
-    UInt8,
+    UInt8(),
     UInt16,
     UInt32,
     UInt64,
@@ -29,6 +31,10 @@ pub enum IntType {
     SInt16,
     SInt32,
     SInt64,
+}
+
+pub struct IntDesc<T> {
+
 }
 
 /// Integer values
@@ -41,13 +47,6 @@ pub enum IntValue {
     SInt16(i16),
     SInt32(i32),
     SInt64(i64),
-}
-
-pub enum BaseType {
-    Int(IntType),
-    Bool,
-    Float32,
-    Float64
 }
 
 pub struct StructDef {
@@ -79,10 +78,6 @@ pub struct DynamicArrayDef {
     pub entry_type: Type
 }
 
-pub struct EnumDef {
-    pub underlying_type: IntType,
-    pub values: Vec<EnumValueDef>
-}
 
 pub struct EnumValueDef {
     pub name: String,
@@ -101,43 +96,11 @@ pub enum Endianness {
     BigEndian,
     LittleEndian
 }
-
-impl std::fmt::Debug for IntType {
-    fn fmt(&self, fmt: &mut std::fmt::Formatter::<'_>) -> Result<(), std::fmt::Error> {
-        use IntType::*;
-        match self {
-            UInt8  => fmt.write_str("u8"),
-            UInt16 => fmt.write_str("u16"),
-            UInt32 => fmt.write_str("u32"),
-            UInt64 => fmt.write_str("u64"),
-            SInt8  => fmt.write_str("i8"),
-            SInt16 => fmt.write_str("i16"),
-            SInt32 => fmt.write_str("i32"),
-            SInt64 => fmt.write_str("i64"),
-        }
-    }
-}
-
-impl std::fmt::Debug for IntValue {
-    fn fmt(&self, fmt: &mut std::fmt::Formatter::<'_>) -> Result<(), std::fmt::Error> {
-        use IntValue::*;
-        match self {
-            UInt8(value)  => value.fmt(fmt),
-            UInt16(value) => value.fmt(fmt),
-            UInt32(value) => value.fmt(fmt),
-            UInt64(value) => value.fmt(fmt),
-            SInt8(value)  => value.fmt(fmt),
-            SInt16(value) => value.fmt(fmt),
-            SInt32(value) => value.fmt(fmt),
-            SInt64(value) => value.fmt(fmt),
-        }
-    }
-}
-
-impl EnumDef {
+/*
+impl<T> EnumDef<T> {
 
     /// Write the enum definition with the given indentation
-    fn fmt_ident(&self, indent: usize, fmt: &mut Formatter::<'_>) -> Result<(), std::fmt::Error> {
+    pub fn fmt_ident(&self, indent: usize, fmt: &mut Formatter::<'_>) -> Result<(), std::fmt::Error> {
 
         write_indent(indent, fmt)?;
 
@@ -166,7 +129,39 @@ impl EnumDef {
     }
 }
 
-impl std::fmt::Debug for EnumDef {
+impl Debug for IntType {
+    fn fmt(&self, fmt: &mut std::fmt::Formatter::<'_>) -> Result<(), std::fmt::Error> {
+        use IntType::*;
+        match self {
+            UInt8  => fmt.write_str("u8"),
+            UInt16 => fmt.write_str("u16"),
+            UInt32 => fmt.write_str("u32"),
+            UInt64 => fmt.write_str("u64"),
+            SInt8  => fmt.write_str("i8"),
+            SInt16 => fmt.write_str("i16"),
+            SInt32 => fmt.write_str("i32"),
+            SInt64 => fmt.write_str("i64"),
+        }
+    }
+}
+
+impl Debug for IntValue {
+    fn fmt(&self, fmt: &mut std::fmt::Formatter::<'_>) -> Result<(), std::fmt::Error> {
+        use IntValue::*;
+        match self {
+            UInt8(value)  => value.fmt(fmt),
+            UInt16(value) => value.fmt(fmt),
+            UInt32(value) => value.fmt(fmt),
+            UInt64(value) => value.fmt(fmt),
+            SInt8(value)  => value.fmt(fmt),
+            SInt16(value) => value.fmt(fmt),
+            SInt32(value) => value.fmt(fmt),
+            SInt64(value) => value.fmt(fmt),
+        }
+    }
+}
+
+impl Debug for EnumDef {
     fn fmt(&self, fmt: &mut std::fmt::Formatter::<'_>) -> Result<(), std::fmt::Error> {
         fmt.write_str("enum : ")?;
         self.underlying_type.fmt(fmt)?;
@@ -197,4 +192,4 @@ fn write_indent(indent: usize, fmt: &mut Formatter::<'_>) -> Result<(), std::fmt
         fmt.write_str("    ")?
     }
     Ok(())
-}
+}*/

@@ -15,3 +15,6 @@ exclude = [
 ]
 
 [dependencies]
+
+[dev-dependencies]
+proptest = "0.9.4"

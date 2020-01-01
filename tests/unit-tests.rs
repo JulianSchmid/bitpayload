@@ -1,8 +1,12 @@
 extern crate bitpayload;
 use bitpayload::*;
 
+extern crate proptest;
+
+mod proptest_generators;
+
 #[test]
-fn fmt_dbg_enum_value() {
+fn fmt_dbg_enum_type() {
 
     use IntType::*;
 
@@ -14,5 +18,5 @@ fn fmt_dbg_enum_value() {
     assert_eq!("i16", format!("{:?}", SInt16));
     assert_eq!("i32", format!("{:?}", SInt32));
     assert_eq!("i64", format!("{:?}", SInt64));
-
 }
+
